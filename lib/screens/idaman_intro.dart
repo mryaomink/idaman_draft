@@ -98,7 +98,7 @@ class _IdamanIntroState extends State<IdamanIntro> {
                   )
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),

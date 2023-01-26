@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:idaman_diskominfo/screens/idaman_intro.dart';
+import 'package:idaman_diskominfo/screens/idaman_sp.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         brightness: Brightness.light,
       ),
-      home: const IdamanIntro(),
+      home: const IdamanSp(),
     );
   }
 }

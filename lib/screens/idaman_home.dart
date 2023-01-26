@@ -18,55 +18,83 @@ class _IdamanHomeState extends State<IdamanHome> {
     'assets/images/banner/updateberita.jpg',
   ];
   List<Widget> menuImg = [
-    Image.asset(
-      'assets/images/pasarbjb.png',
-      fit: BoxFit.cover,
-      width: 40,
-      height: 40,
+    SizedBox(
+      width: 20,
+      height: 20,
+      child: Image.asset(
+        'assets/images/iconmenu/badapat.png',
+        fit: BoxFit.cover,
+      ),
     ),
-    Image.asset(
-      'assets/images/infobapok.png',
-      fit: BoxFit.cover,
-      width: 40,
-      height: 40,
+    SizedBox(
+      width: 20,
+      height: 20,
+      child: Image.asset(
+        'assets/images/iconmenu/cctv.png',
+        fit: BoxFit.fitHeight,
+      ),
     ),
     SizedBox(
       width: 40,
       height: 40,
       child: Image.asset(
-        'assets/images/sangpelayan.png',
+        'assets/images/iconmenu/umkm.png',
         fit: BoxFit.cover,
       ),
     ),
-    Image.asset(
-      'assets/images/wifi.png',
-      fit: BoxFit.cover,
+    SizedBox(
       width: 40,
       height: 40,
+      child: Image.asset(
+        'assets/images/iconmenu/tandai.png',
+        fit: BoxFit.cover,
+      ),
     ),
-    Image.asset(
-      'assets/images/cctv.png',
-      fit: BoxFit.cover,
+    SizedBox(
       width: 40,
       height: 40,
+      child: Image.asset(
+        'assets/images/iconmenu/infopangan.png',
+        fit: BoxFit.cover,
+      ),
     ),
-    Image.asset(
-      'assets/images/badapat.png',
-      fit: BoxFit.cover,
+    SizedBox(
       width: 40,
       height: 40,
+      child: Image.asset(
+        'assets/images/iconmenu/relawantik.png',
+        fit: BoxFit.cover,
+        width: 40,
+        height: 40,
+      ),
     ),
-    Image.asset(
-      'assets/images/bobot.png',
-      fit: BoxFit.cover,
+    SizedBox(
       width: 40,
       height: 40,
+      child: Image.asset(
+        'assets/images/iconmenu/relawanbencana.png',
+        fit: BoxFit.cover,
+        width: 40,
+        height: 40,
+      ),
     ),
-    Image.asset(
-      'assets/images/umkm.png',
-      fit: BoxFit.cover,
+    SizedBox(
       width: 40,
       height: 40,
+      child: Image.asset(
+        'assets/images/iconmenu/infocovid.png',
+        fit: BoxFit.cover,
+        width: 40,
+        height: 40,
+      ),
+    ),
+    SizedBox(
+      width: 40,
+      height: 40,
+      child: Image.asset(
+        'assets/images/iconmenu/bahandap.png',
+        fit: BoxFit.cover,
+      ),
     ),
   ];
   List<String> myMenuImg = [
@@ -84,6 +112,7 @@ class _IdamanHomeState extends State<IdamanHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xff2573BB),
       body: SizedBox(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
@@ -111,13 +140,13 @@ class _IdamanHomeState extends State<IdamanHome> {
                   ),
                 ),
                 const SizedBox(
-                  height: 220,
+                  height: 270,
                   child: SliderBanner(),
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: SizedBox(
-                    height: 180.0,
+                    height: 400.0,
                     child: IdamanMenu(menuImg: menuImg),
                   ),
                 ),
@@ -268,9 +297,9 @@ class IdamanMenu extends StatelessWidget {
     return GridView.count(
       physics: const NeverScrollableScrollPhysics(),
       primary: false,
-      crossAxisCount: 4,
-      mainAxisSpacing: 10,
-      crossAxisSpacing: 16,
+      crossAxisCount: 3,
+      mainAxisSpacing: 24,
+      crossAxisSpacing: 24,
       children: menuImg,
     );
   }
@@ -288,23 +317,23 @@ class SliderBanner extends StatefulWidget {
 class _SliderBannerState extends State<SliderBanner> {
   int _currentIndex = 0;
   final List<String> imgImage = [
-    'assets/images/banner/datapertumbuhan.jpg',
-    'assets/images/banner/petasebaran.jpg',
-    'assets/images/banner/penaganan.jpg',
-    'assets/images/banner/updateberita.jpg',
+    'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80',
+    'https://images.unsplash.com/photo-1457305237443-44c3d5a30b89?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=874&q=80',
+    'https://images.unsplash.com/photo-1457433575995-8407028a9970?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80',
+    'https://images.unsplash.com/photo-1499750310107-5fef28a66643?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80',
   ];
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         CarouselSlider(
           items: imgImage
               .map(
                 (e) => SizedBox(
-                  child: Image.asset(
+                  child: Image.network(
                     e,
                     fit: BoxFit.cover,
                   ),
@@ -316,7 +345,7 @@ class _SliderBannerState extends State<SliderBanner> {
               scrollDirection: Axis.horizontal,
               enlargeCenterPage: true,
               viewportFraction: 1.0,
-              aspectRatio: 2.0,
+              aspectRatio: 1.5,
               onPageChanged: ((index, reason) {
                 setState(() {
                   _currentIndex = index;
