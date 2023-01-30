@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:idaman_diskominfo/screens/badapat_page.dart';
 import 'package:idaman_diskominfo/screens/idaman_intro.dart';
 
 class IdamanHome extends StatefulWidget {
@@ -17,86 +18,7 @@ class _IdamanHomeState extends State<IdamanHome> {
     'assets/images/banner/penaganan.jpg',
     'assets/images/banner/updateberita.jpg',
   ];
-  List<Widget> menuImg = [
-    SizedBox(
-      width: 20,
-      height: 20,
-      child: Image.asset(
-        'assets/images/iconmenu/badapat.png',
-        fit: BoxFit.cover,
-      ),
-    ),
-    SizedBox(
-      width: 20,
-      height: 20,
-      child: Image.asset(
-        'assets/images/iconmenu/cctv.png',
-        fit: BoxFit.fitHeight,
-      ),
-    ),
-    SizedBox(
-      width: 40,
-      height: 40,
-      child: Image.asset(
-        'assets/images/iconmenu/umkm.png',
-        fit: BoxFit.cover,
-      ),
-    ),
-    SizedBox(
-      width: 40,
-      height: 40,
-      child: Image.asset(
-        'assets/images/iconmenu/tandai.png',
-        fit: BoxFit.cover,
-      ),
-    ),
-    SizedBox(
-      width: 40,
-      height: 40,
-      child: Image.asset(
-        'assets/images/iconmenu/infopangan.png',
-        fit: BoxFit.cover,
-      ),
-    ),
-    SizedBox(
-      width: 40,
-      height: 40,
-      child: Image.asset(
-        'assets/images/iconmenu/relawantik.png',
-        fit: BoxFit.cover,
-        width: 40,
-        height: 40,
-      ),
-    ),
-    SizedBox(
-      width: 40,
-      height: 40,
-      child: Image.asset(
-        'assets/images/iconmenu/relawanbencana.png',
-        fit: BoxFit.cover,
-        width: 40,
-        height: 40,
-      ),
-    ),
-    SizedBox(
-      width: 40,
-      height: 40,
-      child: Image.asset(
-        'assets/images/iconmenu/infocovid.png',
-        fit: BoxFit.cover,
-        width: 40,
-        height: 40,
-      ),
-    ),
-    SizedBox(
-      width: 40,
-      height: 40,
-      child: Image.asset(
-        'assets/images/iconmenu/bahandap.png',
-        fit: BoxFit.cover,
-      ),
-    ),
-  ];
+
   List<String> myMenuImg = [
     "assets/images/banner/datapertumbuhan.jpg",
     "assets/images/banner/petasebaran.jpg",
@@ -143,11 +65,11 @@ class _IdamanHomeState extends State<IdamanHome> {
                   height: 270,
                   child: SliderBanner(),
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16.0),
                   child: SizedBox(
                     height: 400.0,
-                    child: IdamanMenu(menuImg: menuImg),
+                    child: IdamanMenu(),
                   ),
                 ),
                 SizedBox(
@@ -287,21 +209,109 @@ class _IdamanHomeState extends State<IdamanHome> {
 class IdamanMenu extends StatelessWidget {
   const IdamanMenu({
     Key? key,
-    required this.menuImg,
   }) : super(key: key);
-
-  final List<Widget> menuImg;
 
   @override
   Widget build(BuildContext context) {
     return GridView.count(
-      physics: const NeverScrollableScrollPhysics(),
-      primary: false,
-      crossAxisCount: 3,
-      mainAxisSpacing: 24,
-      crossAxisSpacing: 24,
-      children: menuImg,
-    );
+        physics: const NeverScrollableScrollPhysics(),
+        primary: false,
+        crossAxisCount: 3,
+        mainAxisSpacing: 24,
+        crossAxisSpacing: 24,
+        children: [
+          InkWell(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const BadapatPage(),
+                ),
+              );
+            },
+            child: SizedBox(
+              width: 20,
+              height: 20,
+              child: Image.asset(
+                'assets/images/iconmenu/badapat.png',
+                fit: BoxFit.fitHeight,
+              ),
+            ),
+          ),
+          SizedBox(
+            width: 20,
+            height: 20,
+            child: Image.asset(
+              'assets/images/iconmenu/cctv.png',
+              fit: BoxFit.fitHeight,
+            ),
+          ),
+          SizedBox(
+            width: 20,
+            height: 20,
+            child: Image.asset(
+              'assets/images/iconmenu/umkm.png',
+              fit: BoxFit.fitHeight,
+            ),
+          ),
+          SizedBox(
+            width: 20,
+            height: 20,
+            child: InkWell(
+              onTap: () {
+                print('tombol di klik');
+              },
+              child: Image.asset(
+                'assets/images/iconmenu/tandai.png',
+                fit: BoxFit.fitHeight,
+              ),
+            ),
+          ),
+          SizedBox(
+            width: 20,
+            height: 20,
+            child: Image.asset(
+              'assets/images/iconmenu/pangan.png',
+              fit: BoxFit.fitHeight,
+            ),
+          ),
+          SizedBox(
+            width: 20,
+            height: 20,
+            child: Image.asset(
+              'assets/images/iconmenu/relatik.png',
+              fit: BoxFit.fitHeight,
+              width: 20,
+              height: 20,
+            ),
+          ),
+          SizedBox(
+            width: 20,
+            height: 20,
+            child: Image.asset(
+              'assets/images/iconmenu/relawanb.png',
+              fit: BoxFit.fitHeight,
+            ),
+          ),
+          SizedBox(
+            width: 20,
+            height: 20,
+            child: Image.asset(
+              'assets/images/iconmenu/covid.png',
+              fit: BoxFit.fitHeight,
+            ),
+          ),
+          SizedBox(
+            width: 20,
+            height: 20,
+            child: Image.asset(
+              'assets/images/iconmenu/bahandap.png',
+              fit: BoxFit.contain,
+              width: 20,
+              height: 20,
+            ),
+          ),
+        ]);
   }
 }
 
