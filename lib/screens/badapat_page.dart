@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -159,7 +161,9 @@ class _YaoIdamanMapSlideState extends State<YaoIdamanMapSlide> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           IconButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              log('Navigation di klik');
+                            },
                             icon: const Icon(
                               Icons.navigation,
                               size: 30,
