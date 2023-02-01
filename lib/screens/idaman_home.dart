@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +10,7 @@ import 'package:idaman_diskominfo/screens/info_pangan.dart';
 import 'package:idaman_diskominfo/screens/intan_bjb.dart';
 import 'package:idaman_diskominfo/screens/jdih_page.dart';
 import 'package:idaman_diskominfo/screens/ppid_page.dart';
+import 'package:shimmer/shimmer.dart';
 
 class IdamanHome extends StatefulWidget {
   const IdamanHome({Key? key}) : super(key: key);
@@ -211,167 +214,200 @@ class _IdamanHomeState extends State<IdamanHome> {
   }
 }
 
-class IdamanMenu extends StatelessWidget {
+class IdamanMenu extends StatefulWidget {
   const IdamanMenu({
     Key? key,
   }) : super(key: key);
 
   @override
+  State<IdamanMenu> createState() => _IdamanMenuState();
+}
+
+class _IdamanMenuState extends State<IdamanMenu> {
+  bool memuatData = false;
+  @override
+  void initState() {
+    super.initState();
+    Timer(const Duration(seconds: 3), () {
+      setState(() {
+        memuatData = true;
+      });
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return GridView.count(
-        physics: const NeverScrollableScrollPhysics(),
-        primary: false,
-        crossAxisCount: 3,
-        mainAxisSpacing: 24,
-        crossAxisSpacing: 24,
-        children: [
-          InkWell(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const BadapatPage(),
-                ),
-              );
-            },
-            child: SizedBox(
-              width: 20,
-              height: 20,
-              child: Image.asset(
-                'assets/images/iconmenu/badapat.png',
-                fit: BoxFit.fitHeight,
-              ),
-            ),
-          ),
-          InkWell(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const IdamanCttv(),
-                ),
-              );
-            },
-            child: SizedBox(
-              width: 20,
-              height: 20,
-              child: Image.asset(
-                'assets/images/iconmenu/cctv.png',
-                fit: BoxFit.fitHeight,
-              ),
-            ),
-          ),
-          InkWell(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const JdihPage(),
-                ),
-              );
-            },
-            child: SizedBox(
-              width: 20,
-              height: 20,
-              child: Image.asset(
-                'assets/images/iconmenu/umkm.png',
-                fit: BoxFit.fitHeight,
-              ),
-            ),
-          ),
-          SizedBox(
-            width: 20,
-            height: 20,
-            child: InkWell(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const BadapatPage(),
+    return memuatData == false
+        ? GridView.builder(
+            itemCount: 9,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                mainAxisSpacing: 24.0,
+                crossAxisSpacing: 24.0),
+            itemBuilder: (context, index) {
+              return Shimmer.fromColors(
+                  baseColor: const Color.fromARGB(255, 84, 84, 81),
+                  highlightColor: Colors.grey.shade200,
+                  child: Container(
+                    height: 20,
+                    width: 20,
+                    color: Colors.grey[200],
+                  ));
+            })
+        : GridView.count(
+            physics: const NeverScrollableScrollPhysics(),
+            primary: false,
+            crossAxisCount: 3,
+            mainAxisSpacing: 24,
+            crossAxisSpacing: 24,
+            children: [
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const BadapatPage(),
+                      ),
+                    );
+                  },
+                  child: SizedBox(
+                    width: 20,
+                    height: 20,
+                    child: Image.asset(
+                      'assets/images/iconmenu/badapat.png',
+                      fit: BoxFit.fitHeight,
+                    ),
                   ),
-                );
-              },
-              child: Image.asset(
-                'assets/images/iconmenu/tandai.png',
-                fit: BoxFit.fitHeight,
-              ),
-            ),
-          ),
-          InkWell(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const InfoPangan(),
                 ),
-              );
-            },
-            child: SizedBox(
-              width: 20,
-              height: 20,
-              child: Image.asset(
-                'assets/images/iconmenu/pangan.png',
-                fit: BoxFit.fitHeight,
-              ),
-            ),
-          ),
-          InkWell(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const IntanBjb(),
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const IdamanCttv(),
+                      ),
+                    );
+                  },
+                  child: SizedBox(
+                    width: 20,
+                    height: 20,
+                    child: Image.asset(
+                      'assets/images/iconmenu/cctv.png',
+                      fit: BoxFit.fitHeight,
+                    ),
+                  ),
                 ),
-              );
-            },
-            child: SizedBox(
-              width: 20,
-              height: 20,
-              child: Image.asset(
-                'assets/images/iconmenu/relatik.png',
-                fit: BoxFit.fitHeight,
-                width: 20,
-                height: 20,
-              ),
-            ),
-          ),
-          InkWell(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const PpidPage(),
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const JdihPage(),
+                      ),
+                    );
+                  },
+                  child: SizedBox(
+                    width: 20,
+                    height: 20,
+                    child: Image.asset(
+                      'assets/images/iconmenu/umkm.png',
+                      fit: BoxFit.fitHeight,
+                    ),
+                  ),
                 ),
-              );
-            },
-            child: SizedBox(
-              width: 20,
-              height: 20,
-              child: Image.asset(
-                'assets/images/iconmenu/relawanb.png',
-                fit: BoxFit.fitHeight,
-              ),
-            ),
-          ),
-          SizedBox(
-            width: 20,
-            height: 20,
-            child: Image.asset(
-              'assets/images/iconmenu/covid.png',
-              fit: BoxFit.fitHeight,
-            ),
-          ),
-          SizedBox(
-            width: 20,
-            height: 20,
-            child: Image.asset(
-              'assets/images/iconmenu/bahandap.png',
-              fit: BoxFit.contain,
-              width: 20,
-              height: 20,
-            ),
-          ),
-        ]);
+                SizedBox(
+                  width: 20,
+                  height: 20,
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const BadapatPage(),
+                        ),
+                      );
+                    },
+                    child: Image.asset(
+                      'assets/images/iconmenu/tandai.png',
+                      fit: BoxFit.fitHeight,
+                    ),
+                  ),
+                ),
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const InfoPangan(),
+                      ),
+                    );
+                  },
+                  child: SizedBox(
+                    width: 20,
+                    height: 20,
+                    child: Image.asset(
+                      'assets/images/iconmenu/pangan.png',
+                      fit: BoxFit.fitHeight,
+                    ),
+                  ),
+                ),
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const IntanBjb(),
+                      ),
+                    );
+                  },
+                  child: SizedBox(
+                    width: 20,
+                    height: 20,
+                    child: Image.asset(
+                      'assets/images/iconmenu/relatik.png',
+                      fit: BoxFit.fitHeight,
+                      width: 20,
+                      height: 20,
+                    ),
+                  ),
+                ),
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const PpidPage(),
+                      ),
+                    );
+                  },
+                  child: SizedBox(
+                    width: 20,
+                    height: 20,
+                    child: Image.asset(
+                      'assets/images/iconmenu/relawanb.png',
+                      fit: BoxFit.fitHeight,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: 20,
+                  height: 20,
+                  child: Image.asset(
+                    'assets/images/iconmenu/covid.png',
+                    fit: BoxFit.fitHeight,
+                  ),
+                ),
+                SizedBox(
+                  width: 20,
+                  height: 20,
+                  child: Image.asset(
+                    'assets/images/iconmenu/bahandap.png',
+                    fit: BoxFit.contain,
+                    width: 20,
+                    height: 20,
+                  ),
+                ),
+              ]);
   }
 }
 
