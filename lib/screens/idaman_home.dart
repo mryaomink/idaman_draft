@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:idaman_diskominfo/screens/all_menu.dart';
 import 'package:idaman_diskominfo/screens/badapat_page.dart';
 import 'package:idaman_diskominfo/screens/idaman_cctv.dart';
 import 'package:idaman_diskominfo/screens/idaman_intro.dart';
@@ -42,7 +43,7 @@ class _IdamanHomeState extends State<IdamanHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xff2573BB),
+      backgroundColor: Color.fromARGB(255, 240, 242, 244),
       body: SizedBox(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
@@ -76,9 +77,32 @@ class _IdamanHomeState extends State<IdamanHome> {
                 const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 16.0),
                   child: SizedBox(
-                    height: 400.0,
+                    height: 340.0,
                     child: IdamanMenu(),
                   ),
+                ),
+                Center(
+                  child: TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const AllMenu(),
+                        ),
+                      );
+                    },
+                    child: const Text(
+                      'All Menu =>',
+                      style: TextStyle(
+                        fontSize: 18.0,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 40,
                 ),
                 SizedBox(
                   height: 40,
