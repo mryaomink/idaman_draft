@@ -1,7 +1,26 @@
-import 'package:flutter/material.dart';
+import 'dart:async';
 
-class AllMenu extends StatelessWidget {
+import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
+
+class AllMenu extends StatefulWidget {
   const AllMenu({super.key});
+
+  @override
+  State<AllMenu> createState() => _AllMenuState();
+}
+
+class _AllMenuState extends State<AllMenu> {
+  bool memuatData = false;
+  @override
+  void initState() {
+    super.initState();
+    Timer(const Duration(seconds: 2), () {
+      setState(() {
+        memuatData = true;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +70,21 @@ class AllMenu extends StatelessWidget {
             child: ListView.builder(
               itemCount: imgIcon.length,
               itemBuilder: (context, index) {
-                return _buildMenuList(context, imgIcon, index, judul, desk);
+                return memuatData == false
+                    ? Shimmer.fromColors(
+                        baseColor: const Color.fromARGB(255, 112, 109, 109),
+                        highlightColor:
+                            const Color.fromARGB(255, 161, 158, 158),
+                        child: Container(
+                          height: 80,
+                          width: 80,
+                          margin: const EdgeInsets.all(16.0),
+                          decoration: BoxDecoration(
+                            color: Colors.grey.withOpacity(0.4),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ))
+                    : _buildMenuList(context, imgIcon, index, judul, desk);
               },
             ),
           ),

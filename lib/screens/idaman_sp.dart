@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:idaman_diskominfo/screens/idaman_home.dart';
+import 'package:idaman_diskominfo/screens/idaman_login.dart';
 
 class IdamanSp extends StatefulWidget {
   const IdamanSp({Key? key}) : super(key: key);
@@ -17,7 +18,7 @@ class _IdamanSpState extends State<IdamanSp> {
       () => Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => const IdamanHome(),
+          builder: (context) => const IdamanLogin(),
         ),
       ),
     );

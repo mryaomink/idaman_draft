@@ -1,16 +1,18 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:idaman_diskominfo/screens/all_menu.dart';
 import 'package:idaman_diskominfo/screens/badapat_page.dart';
 import 'package:idaman_diskominfo/screens/idaman_cctv.dart';
 import 'package:idaman_diskominfo/screens/idaman_intro.dart';
 import 'package:idaman_diskominfo/screens/info_pangan.dart';
+import 'package:idaman_diskominfo/screens/info_penerbangan.dart';
 import 'package:idaman_diskominfo/screens/intan_bjb.dart';
 import 'package:idaman_diskominfo/screens/jdih_page.dart';
-import 'package:idaman_diskominfo/screens/ppid_page.dart';
 import 'package:shimmer/shimmer.dart';
 
 class IdamanHome extends StatefulWidget {
@@ -43,7 +45,7 @@ class _IdamanHomeState extends State<IdamanHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 240, 242, 244),
+      backgroundColor: const Color.fromARGB(255, 240, 242, 244),
       body: SizedBox(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
@@ -249,14 +251,134 @@ class IdamanMenu extends StatefulWidget {
 
 class _IdamanMenuState extends State<IdamanMenu> {
   bool memuatData = false;
+  bool isPressed = false;
+  double scale = 1.0;
+
+  void onTapDown(TapDownDetails details) {
+    setState(() {
+      isPressed = true;
+      scale = 0.9;
+    });
+  }
+
+  void onTapUp(TapUpDetails details) {
+    setState(() {
+      isPressed = true;
+      scale = 0.8;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
-    Timer(const Duration(seconds: 3), () {
+    Timer(const Duration(seconds: 2), () {
       setState(() {
         memuatData = true;
       });
     });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  List<Widget> pagesMenu = const [
+    BadapatPage(),
+    IdamanCttv(),
+    AllMenu(),
+    BadapatPage(),
+    InfoPangan(),
+    IntanBjb(),
+    JdihPage(),
+    InfoPenerbangan(),
+    AllMenu(),
+  ];
+
+  List<Widget> gridMenu = [
+    SizedBox(
+      width: 20,
+      height: 20,
+      child: Image.asset(
+        'assets/images/iconmenu/badapat.png',
+        fit: BoxFit.fitHeight,
+      ),
+    ),
+    SizedBox(
+      width: 20,
+      height: 20,
+      child: Image.asset(
+        'assets/images/iconmenu/cctv.png',
+        fit: BoxFit.fitHeight,
+      ),
+    ),
+    SizedBox(
+      width: 20,
+      height: 20,
+      child: Image.asset(
+        'assets/images/iconmenu/umkm.png',
+        fit: BoxFit.fitHeight,
+      ),
+    ),
+    SizedBox(
+      width: 20,
+      height: 20,
+      child: Image.asset(
+        'assets/images/iconmenu/tandai.png',
+        fit: BoxFit.fitHeight,
+      ),
+    ),
+    SizedBox(
+      width: 20,
+      height: 20,
+      child: Image.asset(
+        'assets/images/iconmenu/pangan.png',
+        fit: BoxFit.fitHeight,
+      ),
+    ),
+    SizedBox(
+      width: 20,
+      height: 20,
+      child: Image.asset(
+        'assets/images/iconmenu/relatik.png',
+        fit: BoxFit.fitHeight,
+        width: 20,
+        height: 20,
+      ),
+    ),
+    SizedBox(
+      width: 20,
+      height: 20,
+      child: Image.asset(
+        'assets/images/iconmenu/relawanb.png',
+        fit: BoxFit.fitHeight,
+        width: 20,
+        height: 20,
+      ),
+    ),
+    SizedBox(
+      width: 20,
+      height: 20,
+      child: Image.asset(
+        'assets/images/iconmenu/covid.png',
+        fit: BoxFit.fitHeight,
+      ),
+    ),
+    SizedBox(
+      width: 20,
+      height: 20,
+      child: Image.asset(
+        'assets/images/iconmenu/bahandap.png',
+        fit: BoxFit.contain,
+      ),
+    ),
+  ];
+
+  Future<void> _pindahPage(BuildContext context, int index) {
+    return Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => pagesMenu[index]),
+    );
   }
 
   @override
@@ -270,12 +392,15 @@ class _IdamanMenuState extends State<IdamanMenu> {
                 crossAxisSpacing: 24.0),
             itemBuilder: (context, index) {
               return Shimmer.fromColors(
-                  baseColor: const Color.fromARGB(255, 84, 84, 81),
-                  highlightColor: Colors.grey.shade200,
+                  baseColor: const Color.fromARGB(255, 112, 109, 109),
+                  highlightColor: const Color.fromARGB(255, 161, 158, 158),
                   child: Container(
                     height: 20,
                     width: 20,
-                    color: Colors.grey[200],
+                    decoration: BoxDecoration(
+                      color: Colors.grey.withOpacity(0.4),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                   ));
             })
         : GridView.count(
@@ -284,154 +409,39 @@ class _IdamanMenuState extends State<IdamanMenu> {
             crossAxisCount: 3,
             mainAxisSpacing: 24,
             crossAxisSpacing: 24,
-            children: [
-                InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const BadapatPage(),
-                      ),
-                    );
-                  },
-                  child: SizedBox(
-                    width: 20,
-                    height: 20,
-                    child: Image.asset(
-                      'assets/images/iconmenu/badapat.png',
-                      fit: BoxFit.fitHeight,
-                    ),
-                  ),
-                ),
-                InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const IdamanCttv(),
-                      ),
-                    );
-                  },
-                  child: SizedBox(
-                    width: 20,
-                    height: 20,
-                    child: Image.asset(
-                      'assets/images/iconmenu/cctv.png',
-                      fit: BoxFit.fitHeight,
-                    ),
-                  ),
-                ),
-                InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const JdihPage(),
-                      ),
-                    );
-                  },
-                  child: SizedBox(
-                    width: 20,
-                    height: 20,
-                    child: Image.asset(
-                      'assets/images/iconmenu/umkm.png',
-                      fit: BoxFit.fitHeight,
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  width: 20,
-                  height: 20,
-                  child: InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const BadapatPage(),
-                        ),
+            children: List.generate(
+              9,
+              (index) => GestureDetector(
+                onTap: () {
+                  setState(() {
+                    if (Platform.isAndroid) {
+                      HapticFeedback.vibrate().then(
+                        (value) => _pindahPage(context, index),
                       );
-                    },
-                    child: Image.asset(
-                      'assets/images/iconmenu/tandai.png',
-                      fit: BoxFit.fitHeight,
-                    ),
+                    }
+                  });
+                },
+                onTapDown: onTapDown,
+                onTapUp: onTapUp,
+                child: AnimatedContainer(
+                  decoration: BoxDecoration(
+                    color: isPressed ? Colors.white : Colors.grey[200],
                   ),
-                ),
-                InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const InfoPangan(),
-                      ),
-                    );
-                  },
-                  child: SizedBox(
-                    width: 20,
-                    height: 20,
-                    child: Image.asset(
-                      'assets/images/iconmenu/pangan.png',
-                      fit: BoxFit.fitHeight,
-                    ),
+                  duration: const Duration(
+                    milliseconds: 200,
                   ),
-                ),
-                InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const IntanBjb(),
-                      ),
-                    );
-                  },
-                  child: SizedBox(
-                    width: 20,
-                    height: 20,
-                    child: Image.asset(
-                      'assets/images/iconmenu/relatik.png',
-                      fit: BoxFit.fitHeight,
-                      width: 20,
-                      height: 20,
+                  curve: Curves.easeInOut,
+                  transform: Matrix4.identity()
+                    ..scale(
+                      scale,
                     ),
-                  ),
-                ),
-                InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const PpidPage(),
-                      ),
-                    );
-                  },
-                  child: SizedBox(
-                    width: 20,
-                    height: 20,
-                    child: Image.asset(
-                      'assets/images/iconmenu/relawanb.png',
-                      fit: BoxFit.fitHeight,
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  width: 20,
                   height: 20,
-                  child: Image.asset(
-                    'assets/images/iconmenu/covid.png',
-                    fit: BoxFit.fitHeight,
-                  ),
-                ),
-                SizedBox(
                   width: 20,
-                  height: 20,
-                  child: Image.asset(
-                    'assets/images/iconmenu/bahandap.png',
-                    fit: BoxFit.contain,
-                    width: 20,
-                    height: 20,
-                  ),
+                  child: gridMenu[index],
                 ),
-              ]);
+              ),
+            ),
+          );
   }
 }
 
