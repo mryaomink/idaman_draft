@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:idaman_diskominfo/screens/idaman_home.dart';
 import 'package:idaman_diskominfo/screens/idaman_login.dart';
 
 class IdamanSp extends StatefulWidget {
@@ -27,15 +26,17 @@ class _IdamanSpState extends State<IdamanSp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/images/idamansp.png'),
-            fit: BoxFit.cover,
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Center(
+            child: Image.asset(
+              'assets/images/logoida.png',
+              fit: BoxFit.cover,
+            ),
           ),
-        ),
+        ],
       ),
     );
   }

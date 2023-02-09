@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:idaman_diskominfo/screens/all_menu.dart';
 import 'package:idaman_diskominfo/screens/idaman_intro.dart';
+import 'package:idaman_diskominfo/widgets/yao_drawer.dart';
 
 import '../widgets/idaman_menu.dart';
 import '../widgets/idaman_slider.dart';
@@ -14,6 +15,8 @@ class IdamanHome extends StatefulWidget {
 }
 
 class _IdamanHomeState extends State<IdamanHome> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   List<String> imgImage = [
     'assets/images/banner/datapertumbuhan.jpg',
     'assets/images/banner/petasebaran.jpg',
@@ -36,6 +39,8 @@ class _IdamanHomeState extends State<IdamanHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
+      drawer: const YaoDrawer(),
       backgroundColor: const Color.fromARGB(255, 240, 242, 244),
       body: SizedBox(
         width: MediaQuery.of(context).size.width,
@@ -57,7 +62,9 @@ class _IdamanHomeState extends State<IdamanHome> {
                         height: 90,
                       ),
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          _scaffoldKey.currentState?.openDrawer();
+                        },
                         icon: const Icon(Icons.menu),
                       )
                     ],
@@ -74,13 +81,20 @@ class _IdamanHomeState extends State<IdamanHome> {
                     child: IdamanMenu(),
                   ),
                 ),
+                const SizedBox(
+                  height: 10.0,
+                ),
                 Center(
-                  child: TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const AllMenu(),
+                  child: InkWell(
+                    splashColor: Colors.amber,
+                    radius: 30.0,
+                    onTap: () async {
+                      await Future.delayed(const Duration(seconds: 1)).then(
+                        (value) => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const AllMenu(),
+                          ),
                         ),
                       );
                     },
@@ -88,7 +102,7 @@ class _IdamanHomeState extends State<IdamanHome> {
                       'All Menu =>',
                       style: TextStyle(
                         fontSize: 18.0,
-                        color: Colors.black,
+                        color: Colors.blueAccent,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
