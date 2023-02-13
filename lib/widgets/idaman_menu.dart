@@ -8,6 +8,7 @@ import 'package:shimmer/shimmer.dart';
 import '../screens/all_menu.dart';
 import '../screens/badapat_page.dart';
 import '../screens/idaman_cctv.dart';
+import '../screens/idaman_umkm.dart';
 import '../screens/info_pangan.dart';
 import '../screens/info_penerbangan.dart';
 import '../screens/intan_bjb.dart';
@@ -61,7 +62,7 @@ class _IdamanMenuState extends State<IdamanMenu> {
   List<Widget> pagesMenu = const [
     BadapatPage(),
     IdamanCttv(),
-    AllMenu(),
+    IdamanUmkm(),
     BadapatPage(),
     InfoPangan(),
     IntanBjb(),

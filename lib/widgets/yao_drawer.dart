@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:idaman_diskominfo/main.dart';
 import 'package:idaman_diskominfo/screens/idaman_login.dart';
 
 class YaoDrawer extends StatefulWidget {
@@ -16,6 +17,7 @@ class _YaoDrawerState extends State<YaoDrawer>
   final List<String> buzzData = ["tes", "tes2", "tes3"];
   late int _notifCount;
   late int _buzzCount;
+
   @override
   void initState() {
     super.initState();
@@ -40,14 +42,33 @@ class _YaoDrawerState extends State<YaoDrawer>
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(
-              height: 180.0,
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage(
-                      'assets/images/logoidaman.png',
-                    ),
-                    fit: BoxFit.cover),
+            // Container(
+            //   height: 180.0,
+            //   decoration: const BoxDecoration(
+            //     image: DecorationImage(
+            //         image: AssetImage(
+            //           'assets/images/logoidaman.png',
+            //         ),
+            //         fit: BoxFit.cover),
+            //   ),
+            // ),
+            UserAccountsDrawerHeader(
+              decoration: BoxDecoration(
+                  color: Colors.yellow.withOpacity(0.2),
+                  image: const DecorationImage(
+                      image: AssetImage('assets/images/logoidaman.png'),
+                      fit: BoxFit.cover)),
+              accountName: const Text(
+                'Reski Juniadi Iswar',
+                style: TextStyle(color: Colors.black),
+              ),
+              accountEmail: const Text('yao.freelance@gmail.com',
+                  style: TextStyle(color: Colors.black)),
+              currentAccountPicture: const CircleAvatar(
+                backgroundColor: Colors.black,
+                child: Icon(
+                  Icons.supervised_user_circle_rounded,
+                ),
               ),
             ),
             Expanded(
@@ -61,11 +82,13 @@ class _YaoDrawerState extends State<YaoDrawer>
                       Icons.chat,
                       color: Colors.black,
                     ),
-                    title: const Text(
+                    title: Text(
                       'Chat',
                       style: TextStyle(
                         fontSize: 16.0,
-                        color: Colors.black,
+                        color: MyApp.themeNotifier.value == ThemeMode.light
+                            ? Colors.blue
+                            : Colors.amber,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -77,11 +100,13 @@ class _YaoDrawerState extends State<YaoDrawer>
                       Icons.warning,
                       color: Colors.black,
                     ),
-                    title: const Text(
+                    title: Text(
                       'Buzz',
                       style: TextStyle(
                         fontSize: 16.0,
-                        color: Colors.black,
+                        color: MyApp.themeNotifier.value == ThemeMode.light
+                            ? Colors.blue
+                            : Colors.amber,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -93,11 +118,13 @@ class _YaoDrawerState extends State<YaoDrawer>
                       Icons.settings,
                       color: Colors.black,
                     ),
-                    title: const Text(
+                    title: Text(
                       'Setting',
                       style: TextStyle(
                         fontSize: 16.0,
-                        color: Colors.black,
+                        color: MyApp.themeNotifier.value == ThemeMode.light
+                            ? Colors.blue
+                            : Colors.amber,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -115,11 +142,13 @@ class _YaoDrawerState extends State<YaoDrawer>
                       Icons.exit_to_app,
                       color: Colors.black,
                     ),
-                    title: const Text(
+                    title: Text(
                       'Logout',
                       style: TextStyle(
                         fontSize: 16.0,
-                        color: Colors.black,
+                        color: MyApp.themeNotifier.value == ThemeMode.light
+                            ? Colors.blue
+                            : Colors.amber,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -136,11 +165,34 @@ class _YaoDrawerState extends State<YaoDrawer>
                       Icons.info,
                       color: Colors.black,
                     ),
-                    title: const Text(
+                    title: Text(
                       'Tentang',
                       style: TextStyle(
                         fontSize: 16.0,
-                        color: Colors.black,
+                        color: MyApp.themeNotifier.value == ThemeMode.light
+                            ? Colors.blue
+                            : Colors.amber,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  ListTile(
+                    onTap: () {
+                      MyApp.themeNotifier.value =
+                          MyApp.themeNotifier.value == ThemeMode.light
+                              ? ThemeMode.dark
+                              : ThemeMode.light;
+                    },
+                    leading: Icon(MyApp.themeNotifier.value == ThemeMode.light
+                        ? Icons.dark_mode
+                        : Icons.light_mode),
+                    title: Text(
+                      'Dark Light Mode',
+                      style: TextStyle(
+                        fontSize: 16.0,
+                        color: MyApp.themeNotifier.value == ThemeMode.light
+                            ? Colors.blue
+                            : Colors.amber,
                         fontWeight: FontWeight.bold,
                       ),
                     ),

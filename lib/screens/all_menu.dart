@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
+import '../main.dart';
+
 class AllMenu extends StatefulWidget {
   const AllMenu({super.key});
 
@@ -47,6 +49,7 @@ class _AllMenuState extends State<AllMenu> {
     final List<String> desk = ["Tes", "Tes", "Tes", "Tes", "Tes", "Tes", "Tes"];
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         title: const Text(
           'Layanan Informasi',
           style: TextStyle(color: Colors.black),
@@ -122,9 +125,11 @@ class _AllMenuState extends State<AllMenu> {
             children: [
               Text(
                 judul[index],
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 22.0,
-                  color: Color(0xff131212),
+                  color: MyApp.themeNotifier.value == ThemeMode.light
+                      ? Colors.blue
+                      : Colors.yellow,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -133,9 +138,11 @@ class _AllMenuState extends State<AllMenu> {
               ),
               Text(
                 desk[index],
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 14.0,
-                  color: Color.fromARGB(255, 107, 100, 100),
+                  color: MyApp.themeNotifier.value == ThemeMode.light
+                      ? Colors.black
+                      : Colors.white,
                   fontWeight: FontWeight.w500,
                 ),
                 maxLines: 2,
